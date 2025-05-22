@@ -1,12 +1,14 @@
 FROM node:22-slim
 
-WORKDIR /app
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates curl && \
+    update-ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
+WORKDIR /app
 COPY . .
 
 RUN npm install
 
 EXPOSE 8080
-
-# 启动应用
 CMD ["npm", "run", "start"]

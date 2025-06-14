@@ -1,6 +1,9 @@
 <div align="center">
     <a href="https://github.com/MarSeventh/CloudFlare-ImgBed"><img width="80%" alt="logo" src="static/readme/banner.png"/></a>
     <p><em>🗂️开源文件托管解决方案，基于 Cloudflare Pages，支持 Telegram Bot 、 Cloudflare R2 ，S3 等多种存储渠道</em></p>
+    <p>
+        <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README.md">简体中文</a>|<a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README_en.md">English</a>
+    </p>
     <div>
         <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/LICENSE">
         <img src="https://img.shields.io/github/license/MarSeventh/CloudFlare-ImgBed" alt="License" />
@@ -25,6 +28,7 @@
         </a>
     </div>
 </div>
+
 
 
 ---
@@ -121,17 +125,21 @@
 
 Add Features:
 
-- `upload`接口支持跨域访问和调用
-
-Fix Bugs:
-
-- 修复`list`接口返回数据完整性的问题
+- 美化报错图片
+- 上传页面支持预览ico等更多格式文件
 
 
 
 <details>
     <summary>更新日志</summary>
 
+
+## 2025.6.13
+
+Add Features:
+
+- 美化报错图片
+- 上传页面支持预览ico等更多格式文件
 
 ## 2025.6.12
 
@@ -660,7 +668,7 @@ Add Features:
 
    程序默认运行在`8080`端口上，使用`nginx`等服务器反代`127.0.0.1:8080`即可外网访问服务。如需修改端口，可在`package.json`中修改`start`脚本的`port`参数（如下）。
 
-   ```toml
+   ```json
    "scripts": {
        "ci-test": "concurrently --kill-others \"npm start\" \"wait-on http://localhost:8080 && mocha\"",
        "test": "mocha",

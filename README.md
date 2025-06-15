@@ -48,11 +48,7 @@
 
 1. 部署使用出现问题，请先仔细查阅文档、常见问题解答以及已有issues。
 
-2. **体验地址**：[CloudFlare ImgBed](https://cfbed.1314883.xyz/) 访问密码：`cfbed`
-
-3. **前端仓库**：[MarSeventh/Sanyue-ImgHub](https://github.com/MarSeventh/Sanyue-ImgHub)
-
-4. **注意**：本仓库为[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)项目的重制版，如果你觉得本项目不错，在支持本项目的同时，也请支持原项目。
+2. **注意**：本仓库为[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)项目的重制版，如果你觉得本项目不错，在支持本项目的同时，也请支持原项目。
 
 ## 2025.2.6  V2.0 版本升级注意事项
 
@@ -79,30 +75,6 @@
 
 </details>
 
-
-<details>
-    <summary>优质博文、视频</summary>
-
-
-**体验视频**：[CloudFlare免费图床，轻松守护你的每一份精彩！_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1y3WGe4EGh/?vd_source=da5ecbe595e41089cd1bed95932b8bfd)
-
-**相关视频教程**：
-
-- [利用Cloudflare R2 +Pages搭建在线图床系统，不限空间，不被墙，超级简单，完全免费 (youtube.com)](https://www.youtube.com/watch?v=T8VayuUMOzM)
-
-**相关优质博文（感谢每一位鼎力支持的热心大佬）：**
-
-- [CloudFlare-ImgBed项目 – yunsen2025的小窝](https://www.yunsen2025.top/category/cloudflare-imgbed/)
-  - [完全免费，图文教程手把手教你使用cloudflare搭建一个无限空间的私人图床 支持身份认证与成人元素鉴定！ - yunsen2025的小窝](https://www.yunsen2025.top/blog-cfpages-syq-imgbed)
-  - [为CloudFlare-ImgBed图床配置国内CDN并分线路解析，以最低成本享受极致速度！ – yunsen2025的小窝](https://www.yunsen2025.top/cloudflare-imgbed-fen-xian-pei-zhi-guo-nei-cdn/)
-- [利用cloudflare pages搭建telegram频道图床 (lepidus.me)](https://blogstr.lepidus.me/post/1725801323700/)
-- [搭建基于CloudFlare和Telegram的免费图床教程 - 刘学馆 | Blog (sexy0769.com)](https://blog.sexy0769.com/skill/735.html)
-- [CloudFlare+Github，打造属于自己的免费图床 - 大头钉的小小blog (luckyting.top)](https://luckyting.top/index.php/archives/20/)
-
-</details>
-
-
-
 ## 最近更新（[更新日志](https://cfbed.sanyue.de/guide/update-log.html)）：
 
 Add Features:
@@ -121,7 +93,9 @@ Add Features:
 
 提供详细的部署文档、功能文档、开发计划、常见问题解答等，帮助您快速上手。
 
-# 3.Show
+# 3.Demo
+
+**演示站点**：[CloudFlare ImgBed](https://cfbed.1314883.xyz/) 访问密码：`cfbed`
 
 ![image-20250313204101984](static/readme/202503132041511.png)
 
@@ -144,6 +118,8 @@ Add Features:
 # 4.Tips
 
 - 前端开源，参见[MarSeventh/Sanyue-ImgHub](https://github.com/MarSeventh/Sanyue-ImgHub)项目。
+
+- **生态建设**：欢迎社区参与生态建设，欢迎提交 PR 或者 Issue，优质内容参见[官网生态建设页面](https://cfbed.sanyue.de/about/ecosystem.html)。
 
 - **赞助**：项目维护不易，喜欢本项目的话，可以作者大大一点小小的鼓励哦，您的每一份支持都是我前进的动力\~ 
 

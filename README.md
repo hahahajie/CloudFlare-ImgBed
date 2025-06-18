@@ -2,7 +2,7 @@
     <a href="https://github.com/MarSeventh/CloudFlare-ImgBed"><img width="80%" alt="logo" src="static/readme/banner.png"/></a>
     <p><em>🗂️开源文件托管解决方案，基于 Cloudflare Pages，支持 Telegram Bot 、 Cloudflare R2 、S3 等多种存储渠道</em></p>
     <p>
-        <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README.md">简体中文</a>|<a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README_en.md">English</a>|<a href="https://cfbed.sanyue.de">官方网站</a>
+        <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README.md">简体中文</a> | <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README_en.md">English</a> | <a href="https://cfbed.sanyue.de">官方网站</a>
     </p>
     <div>
         <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/LICENSE">
@@ -28,6 +28,7 @@
         </a>
     </div>
 </div>
+
 
 
 
@@ -75,12 +76,7 @@
 
 </details>
 
-## 最近更新（[更新日志](https://cfbed.sanyue.de/guide/update-log.html)）：
 
-Add Features:
-
-- 美化报错图片
-- 上传页面支持预览ico等更多格式文件
 
 
 # 1.Introduction
@@ -91,7 +87,9 @@ Add Features:
 
 # 2.[Document](https://cfbed.sanyue.de)
 
-提供详细的部署文档、功能文档、开发计划、常见问题解答等，帮助您快速上手。
+提供详细的部署文档、功能文档、开发计划、更新日志、常见问题解答等，帮助您快速上手。
+
+[![更新日志](https://recent-update.cfbed.sanyue.de/cn)](https://cfbed.sanyue.de/guide/update-log.html)
 
 # 3.Demo
 
@@ -117,7 +115,7 @@ Add Features:
 
 # 4.Tips
 
-- 前端开源，参见[MarSeventh/Sanyue-ImgHub](https://github.com/MarSeventh/Sanyue-ImgHub)项目。
+- **前端开源**：参见[MarSeventh/Sanyue-ImgHub](https://github.com/MarSeventh/Sanyue-ImgHub)项目。
 
 - **生态建设**：欢迎社区参与生态建设，欢迎提交 PR 或者 Issue，优质内容参见[官网生态建设页面](https://cfbed.sanyue.de/about/ecosystem.html)。
 

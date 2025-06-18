@@ -2,7 +2,7 @@
     <a href="https://github.com/MarSeventh/CloudFlare-ImgBed"><img width="80%" alt="logo" src="static/readme/banner.png"/></a>
     <p><em>🗂️Open-source file hosting solution based on Cloudflare Pages, supporting multiple storage channels such as Telegram Bot, Cloudflare R2, S3, etc.</em></p>
     <p>
-        <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README.md">简体中文</a>|<a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README_en.md">English</a>|<a
+        <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README.md">简体中文</a> | <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README_en.md">English</a> | <a
         href="https://cfbed.sanyue.de">Official Website</a>
     </p>
     <div>
@@ -66,12 +66,7 @@
 
 </details>
 
-## Recent Updates ([Update Log](https://cfbed.sanyue.de/guide/update-log.html)):
 
-Add Features:
-
-- Beautify error images
-- Upload page supports preview of ico and more formats
 
 # 1. Introduction
 
@@ -81,7 +76,9 @@ Free file hosting solution with full lifecycle features including **upload**, **
 
 # 2. [Document](https://cfbed.sanyue.de)
 
-Provides detailed deployment documentation, feature docs, development plans, FAQ, and more to help you get started quickly.
+Provides detailed deployment documentation, feature docs, development plans, update logs, FAQ, and more to help you get started quickly.
+
+[![recent update](https://recent-update.cfbed.sanyue.de/en)](https://cfbed.sanyue.de/en/guide/update-log.html)
 
 # 3. Demo
 

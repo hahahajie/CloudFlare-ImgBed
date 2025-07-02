@@ -129,6 +129,10 @@ Provides detailed deployment documentation, feature docs, development plans, upd
 
 - **[ShuangyiNiao Data](https://www.synidc.cn/)**：Provides cloud computing resources support (High-Security CDN in China and Overseas | Cloud Servers Worldwide | Domestic Dedicated Servers)
 
+- [Tencent EdgeOne](https://edgeone.ai/?from=github): Provides CDN acceleration and security protection
+
+  <a href="https://edgeone.ai/?from=github"><img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="tencent logo" width="300"/></a>
+
 - **DartNode**: Provides cloud computing resources support
 
-[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
+  [![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")

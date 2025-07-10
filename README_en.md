@@ -1,6 +1,6 @@
 <div align="center">
     <a href="https://github.com/MarSeventh/CloudFlare-ImgBed"><img width="80%" alt="logo" src="static/readme/banner.png"/></a>
-    <p><em>🗂️Open-source file hosting solution based on Cloudflare Pages, supporting multiple storage channels such as Telegram Bot, Cloudflare R2, S3, etc.</em></p>
+    <p><em>🗂️Open-source file hosting solution, supporting Docker and serverless deployment, supporting multiple storage channels such as Telegram Bot, Cloudflare R2, S3, etc.</em></p>
     <p>
         <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README.md">简体中文</a> | <a href="https://github.com/MarSeventh/CloudFlare-ImgBed/blob/main/README_en.md">English</a> | <a
         href="https://cfbed.sanyue.de/en">Official Website</a>
@@ -29,6 +29,7 @@
         </a>
     </div>
 </div>
+
 
 ---
 
@@ -125,14 +126,10 @@ Provides detailed deployment documentation, feature docs, development plans, upd
 
 # 6. Special Sponsors
 
-- **[AsiaYun](https://www.asiayun.com/)**: Provides cloud computing resources support (high defense servers | Fuzhou high defense | Guangdong Telecom | Hong Kong servers | US servers | Overseas servers)
+- **[CloudFlare](https://www.cloudflare.com) & [EdgeOne](https://edgeone.ai/?from=github)**：Provides CDN acceleration, and security protection
 
-- **[ShuangyiNiao Data](https://www.synidc.cn/)**：Provides cloud computing resources support (High-Security CDN in China and Overseas | Cloud Servers Worldwide | Domestic Dedicated Servers)
+  <a href="https://www.cloudflare.com"><img src="static/readme/cloudflare-logo.png" alt="Cloudflare Logo" height="25"></a> <a href="https://edgeone.ai/?from=github"><img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="Tencent Logo" height="25"></a>
 
-- [Tencent EdgeOne](https://edgeone.ai/?from=github): Provides CDN acceleration and security protection
-
-  <a href="https://edgeone.ai/?from=github"><img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="tencent logo" width="300"/></a>
-
-- **DartNode**: Provides cloud computing resources support
+- **[AsiaYun](https://www.asiayun.com) & [ShuangyiNiao Data](https://www.synidc.cn) & [DartNode](https://dartnode.com)**：Provides cloud computing resources support
 
   [![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")

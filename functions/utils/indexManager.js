@@ -441,6 +441,7 @@ export async function mergeOperationsToIndex(context, options = {}) {
  * @param {string} options.channel - 渠道过滤
  * @param {string} options.listType - 列表类型过滤
  * @param {boolean} options.countOnly - 仅返回总数
+ * @param {boolean} options.includeSubdirFiles - 是否包含子目录下的文件
  */
 export async function readIndex(context, options = {}) {
     try {
@@ -451,7 +452,8 @@ export async function readIndex(context, options = {}) {
             count = 50,
             channel = '',
             listType = '',
-            countOnly = false
+            countOnly = false,
+            includeSubdirFiles = false
         } = options;
 
         const index = await getIndex(context);
@@ -499,12 +501,17 @@ export async function readIndex(context, options = {}) {
 
         // 分页处理
         const totalCount = filteredFiles.length;
-        // 获取当前目录下的直接文件
-        let resultFiles = filteredFiles.filter(file => {
-            const fileDir = file.metadata.Directory ? file.metadata.Directory : extractDirectory(file.id);
+
+        let resultFiles = filteredFiles;
+
+        // 如果不包含子目录文件，获取当前目录下的直接文件
+        if (!includeSubdirFiles) {
             const dirPrefix = directory === '' || directory.endsWith('/') ? directory : directory + '/';
-            return fileDir === dirPrefix;
-        });
+            resultFiles = filteredFiles.filter(file => {
+                const fileDir = file.metadata.Directory ? file.metadata.Directory : extractDirectory(file.id);
+                return fileDir === dirPrefix;
+            });
+        }
 
         if (count !== -1) {
             const startIndex = Math.max(0, start);
@@ -683,7 +690,10 @@ export async function getIndexInfo(context) {
         
         index.files.forEach(file => {
             // 渠道统计
-            const channel = file.metadata.Channel || 'Unknown';
+            let channel = file.metadata.Channel || 'Telegraph';
+            if (channel === 'TelegramNew') {
+                channel = 'Telegram';
+            }
             channelStats[channel] = (channelStats[channel] || 0) + 1;
 
             // 目录统计
@@ -691,7 +701,12 @@ export async function getIndexInfo(context) {
             directoryStats[dir] = (directoryStats[dir] || 0) + 1;
             
             // 类型统计
-            typeStats[file.metadata.ListType] = (typeStats[file.metadata.ListType] || 0) + 1;
+            let listType = file.metadata.ListType || 'None';
+            const label = file.metadata.Label || 'None';
+            if (listType !== 'White' && label === 'adult') {
+                listType = 'Block';
+            }
+            typeStats[listType] = (typeStats[listType] || 0) + 1;
         });
 
         return {

@@ -1,4 +1,5 @@
 import { readIndex } from '../../../utils/indexManager.js';
+import { getDatabase } from '../../../utils/databaseAdapter.js';
 
 export async function onRequest(context) {
     const { request, env } = context;
@@ -31,6 +32,8 @@ export async function onRequest(context) {
 async function handleBackup(context) {
     const { env } = context;
     try {
+        const db = getDatabase(env);
+
         const backupData = {
             timestamp: Date.now(),
             version: '2.0.2',
@@ -54,10 +57,10 @@ async function handleBackup(context) {
             const fileId = file.id;
             const metadata = file.metadata;
             
-            // 对于TelegramNew渠道且IsChunked为true的文件，需要从KV读取其值
+            // 对于TelegramNew渠道且IsChunked为true的文件，需要从数据库读取其值
             if (metadata.Channel === 'TelegramNew' && metadata.IsChunked === true) {
                 try {
-                    const fileData = await env.img_url.getWithMetadata(fileId);
+                    const fileData = await db.getWithMetadata(fileId);
                     backupData.data.files[fileId] = {
                         metadata: metadata,
                         value: fileData.value
@@ -80,12 +83,12 @@ async function handleBackup(context) {
         }
 
         // 备份系统设置
-        const settingsList = await env.img_url.list({ prefix: 'manage@' });
+        const settingsList = await db.list({ prefix: 'manage@' });
         for (const key of settingsList.keys) {
             // 忽略索引文件
             if (key.name.startsWith('manage@index')) continue;
 
-            const setting = await env.img_url.get(key.name);
+            const setting = await db.get(key.name);
             if (setting) {
                 backupData.data.settings[key.name] = setting;
             }
@@ -108,6 +111,8 @@ async function handleBackup(context) {
 // 处理恢复操作
 async function handleRestore(request, env) {
     try {
+        const db = getDatabase(env);
+
         const contentType = request.headers.get('content-type');
         
         if (!contentType || !contentType.includes('application/json')) {
@@ -135,12 +140,12 @@ async function handleRestore(request, env) {
             try {
                 if (fileData.value) {
                     // 对于有value的文件（如telegram分块文件），恢复完整数据
-                    await env.img_url.put(key, fileData.value, {
+                    await db.put(key, fileData.value, {
                         metadata: fileData.metadata
                     });
                 } else if (fileData.metadata) {
                     // 只恢复元数据
-                    await env.img_url.put(key, '', {
+                    await db.put(key, '', {
                         metadata: fileData.metadata
                     });
                 }
@@ -153,7 +158,7 @@ async function handleRestore(request, env) {
         // 恢复系统设置
         for (const [key, value] of Object.entries(backupData.data.settings)) {
             try {
-                await env.img_url.put(key, value);
+                await db.put(key, value);
                 restoredSettings++;
             } catch (error) {
                 console.error(`恢复设置 ${key} 失败:`, error);

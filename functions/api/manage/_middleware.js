@@ -1,6 +1,7 @@
 import { fetchSecurityConfig } from "../../utils/sysConfig";
-import { checkKVConfig } from "../../utils/middleware";
+import { checkDatabaseConfig } from "../../utils/middleware";
 import { validateApiToken } from "../../utils/tokenValidator";
+import { getDatabase } from "../../utils/databaseAdapter.js";
 
 let securityConfig = {}
 let basicUser = ""
@@ -116,7 +117,8 @@ async function authentication(context) {
       const pathname = new URL(context.request.url).pathname;
       const requiredPermission = extractRequiredPermission(pathname);
 
-      const tokenValidation = await validateApiToken(context.request, context.env.img_url, requiredPermission);
+      const db = getDatabase(context.env);
+      const tokenValidation = await validateApiToken(context.request, db, requiredPermission);
       if (tokenValidation.valid) {
         // Token验证通过，继续处理请求
         return context.next();
@@ -146,4 +148,4 @@ async function authentication(context) {
   
 }
 
-export const onRequest = [checkKVConfig, errorHandling, authentication];
+export const onRequest = [checkDatabaseConfig, errorHandling, authentication];

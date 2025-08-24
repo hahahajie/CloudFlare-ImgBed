@@ -1,5 +1,6 @@
 import { readIndex, mergeOperationsToIndex, deleteAllOperations, rebuildIndex,
     getIndexInfo, getIndexStorageStats } from '../../utils/indexManager.js';
+import { getDatabase } from '../../utils/databaseAdapter.js';
 
 export async function onRequest(context) {
     const { request, waitUntil } = context;
@@ -106,13 +107,13 @@ export async function onRequest(context) {
 
         // 索引读取失败，直接从 KV 中获取所有文件记录
         if (!result.success) {
-            const kvRecords = await getAllFileRecords(context.env, dir);
+            const dbRecords = await getAllFileRecords(context.env, dir);
             
             return new Response(JSON.stringify({
-                files: kvRecords.files,
-                directories: kvRecords.directories,
-                totalCount: kvRecords.totalCount,
-                returnedCount: kvRecords.returnedCount,
+                files: dbRecords.files,
+                directories: dbRecords.directories,
+                totalCount: dbRecords.totalCount,
+                returnedCount: dbRecords.returnedCount,
                 indexLastUpdated: Date.now(),
                 isIndexedResponse: false // 标记这是来自 KV 的响应
             }), {
@@ -153,52 +154,72 @@ async function getAllFileRecords(env, dir) {
     const allRecords = [];
     let cursor = null;
 
-    while (true) {
-        const response = await env.img_url.list({
-            prefix: dir,
-            limit: 1000,
-            cursor: cursor
+    try {
+        const db = getDatabase(env);
+
+        while (true) {
+            const response = await db.list({
+                prefix: dir,
+                limit: 1000,
+                cursor: cursor
+            });
+
+            // 检查响应格式
+            if (!response || !response.keys || !Array.isArray(response.keys)) {
+                console.error('Invalid response from database list:', response);
+                break;
+            }
+
+            cursor = response.cursor;
+
+            for (const item of response.keys) {
+                // 跳过管理相关的键
+                if (item.name.startsWith('manage@') || item.name.startsWith('chunk_')) {
+                    continue;
+                }
+
+                // 跳过没有元数据的文件
+                if (!item.metadata || !item.metadata.TimeStamp) {
+                    continue;
+                }
+
+                allRecords.push(item);
+            }
+
+            if (!cursor) break;
+            
+            // 添加协作点
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
+
+        // 提取目录信息
+        const directories = new Set();
+        const filteredRecords = [];
+        allRecords.forEach(item => {
+            const subDir = item.name.substring(dir.length);
+            const firstSlashIndex = subDir.indexOf('/');
+            if (firstSlashIndex !== -1) {
+                directories.add(dir + subDir.substring(0, firstSlashIndex));
+            } else {
+                filteredRecords.push(item);
+            }
         });
 
-        cursor = response.cursor;
+        return {
+            files: filteredRecords,
+            directories: Array.from(directories),
+            totalCount: allRecords.length,
+            returnedCount: filteredRecords.length
+        };
 
-        for (const item of response.keys) {
-            // 跳过管理相关的键
-            if (item.name.startsWith('manage@') || item.name.startsWith('chunk_')) {
-                continue;
-            }
-
-            // 跳过没有元数据的文件
-            if (!item.metadata || !item.metadata.TimeStamp) {
-                continue;
-            }
-
-            allRecords.push(item);
-        }
-
-        if (!cursor) break;
-        
-        // 添加协作点
-        await new Promise(resolve => setTimeout(resolve, 10));
+    } catch (error) {
+        console.error('Error in getAllFileRecords:', error);
+        return {
+            files: [],
+            directories: [],
+            totalCount: 0,
+            returnedCount: 0,
+            error: error.message
+        };
     }
-
-    // 提取目录信息
-    const directories = new Set();
-    const filteredRecords = [];
-    allRecords.forEach(item => {
-        const subDir = item.name.substring(dir.length);
-        const firstSlashIndex = subDir.indexOf('/');
-        if (firstSlashIndex !== -1) {
-            directories.add(dir + subDir.substring(0, firstSlashIndex));
-        } else {
-            filteredRecords.push(item);
-        }
-    });
-
-    return {
-        files: filteredRecords,
-        directories: Array.from(directories),
-        totalCount: allRecords.length,
-        returnedCount: filteredRecords.length
-    };
 }

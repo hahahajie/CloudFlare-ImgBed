@@ -1,6 +1,7 @@
 import sentryPlugin from "@cloudflare/pages-plugin-sentry";
 import '@sentry/tracing';
 import { fetchOthersConfig } from "./sysConfig";
+import { checkDatabaseConfig as checkDbConfig } from './databaseAdapter.js';
 
 let disableTelemetry = false;
 
@@ -111,18 +112,19 @@ async function fetchSampleRate(context) {
   }
 }
 
-// 检查 KV 是否配置，文件索引是否存在
-export async function checkKVConfig(context) {
-  const { env, waitUntil } = context;
+// 检查数据库是否配置
+export async function checkDatabaseConfig(context) {
+  var env = context.env;
 
-  // 检查 img_url KV 绑定是否存在
-  if (typeof env.img_url == "undefined" || env.img_url == null) {
+  var dbConfig = checkDbConfig(env);
+
+  if (!dbConfig.configured) {
     return new Response(
       JSON.stringify({
         success: false,
-        error: "KV 数据库未配置 / KV not configured",
-        message: "img_url KV 绑定未找到，请检查您的 KV 配置。 / img_url KV binding not found, please check your KV configuration."
-      }), 
+        error: "数据库未配置 / Database not configured",
+        message: "请配置 D1 数据库 (env.img_d1) 或 KV 存储 (env.img_url)。 / Please configure D1 database (env.img_d1) or KV storage (env.img_url)."
+      }),
       {
         status: 500,
         headers: {
@@ -133,5 +135,5 @@ export async function checkKVConfig(context) {
   }
 
   // 继续执行
-  return context.next();
+  return await context.next();
 }

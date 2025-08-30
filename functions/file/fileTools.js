@@ -35,6 +35,7 @@ export function setCommonHeaders(headers, encodedFileName, fileType, Referer, ur
     headers.set('Content-Disposition', `inline; filename="${encodedFileName}"; filename*=UTF-8''${encodedFileName}`);
     headers.set('Access-Control-Allow-Origin', '*');
     headers.set('Accept-Ranges', 'bytes');
+    headers.set('Vary', 'Range');
     
     if (fileType) {
         headers.set('Content-Type', fileType);

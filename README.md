@@ -59,6 +59,69 @@
 
 2. **注意**：本仓库为[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)项目的重制版，如果你觉得本项目不错，在支持本项目的同时，也请支持原项目。
 
+## 2026.3.4 V2.6.2 重构 Docker 镜像的说明
+
+> 本次版本对 Docker 镜像进行了重构，涉及基础镜像、目录结构和数据库等方面的变更，带来了并发、内存管理等方面的优化。为确保数据安全，请务必**先备份数据再进行升级**。
+>
+> ### 升级前：备份数据
+>
+> 1. 备份数据：在管理面板下载备份文件（若原来使用本地R2存储需要全部下载重传）
+> 2. 备份data文件夹
+>
+> ### 升级步骤
+>
+> 1. 拉取最新镜像：
+>
+>    ```bash
+>    docker compose pull
+>    ```
+>
+> 2. 使用新镜像启动容器：
+>
+>    ```bash
+>    docker compose up -d
+>    ```
+>
+> 3. 检查容器是否正常运行：
+>
+>    ```bash
+>    docker compose logs -f
+>    ```
+>
+>    确认日志中无报错信息后即可正常使用。
+>
+> 4. 恢复数据：在管理面板恢复全部数据（原来的R2文件需要重传）
+> 
+> ### 升级异常：回退版本
+>
+> 如果升级后出现异常，可通过以下步骤回退：
+>
+> 1. 停止容器：
+>
+>    ```bash
+>    docker compose down
+>    ```
+>
+> 2. 回退到旧版本镜像：
+>
+>    ```bash
+>    # amd64
+>    docker pull marseventh/cloudflare-imgbed@sha256:896dc1b79883
+>    # arm
+>    docker pull marseventh/cloudflare-imgbed@sha256:b5442ccc198c
+>    ```
+>
+>    同时修改 `docker-compose.yml` 中的 `image` 字段为对应旧版本 tag，然后重新启动：
+>
+>    ```bash
+>    docker compose up -d
+>    ```
+>
+> **注意事项**：
+> - 升级前请务必确认备份完整，必要时备份一份data文件夹
+> - 如果你使用了自定义的 `docker-compose.yml` 配置（如自定义端口、环境变量等），升级时请注意保留
+> - 遇到问题请先查阅文档和已有 issues，或提交新的 issue
+
 ## 2025.2.6  V2.0 版本升级注意事项
 
 > v2.0 版已发布，相较于 v1.0 版本进行了大量改动和优化，但 beta 版本可能存在潜在不稳定性，若您追求稳定，可选择暂缓更新。

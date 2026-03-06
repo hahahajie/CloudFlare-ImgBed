@@ -53,6 +53,69 @@
 1. If you encounter issues during deployment or usage, please carefully read the documentation, FAQ, and existing issues first.
 2. **Note**: This repository is a remake of the [Telegraph-Image](https://github.com/cf-pages/Telegraph-Image) project. If you like this project, please support the original one as well.
 
+## 2026.3.4 V2.6.2 Docker Image Rebuild Notice
+
+> The Docker image has been rebuilt in this release, involving changes to the base image, directory structure, and database, bringing optimizations in concurrency, memory management, and more. To ensure data safety, please **back up your data before upgrading**.
+>
+> ### Before Upgrading: Back Up Data
+>
+> 1. Back up data: Download the backup file from the admin panel (if you were using local R2 storage, you need to download and re-upload all files)
+> 2. Back up the data folder
+>
+> ### Upgrade Steps
+>
+> 1. Pull the latest image:
+>
+>    ```bash
+>    docker compose pull
+>    ```
+>
+> 2. Start the container with the new image:
+>
+>    ```bash
+>    docker compose up -d
+>    ```
+>
+> 3. Verify the container is running properly:
+>
+>    ```bash
+>    docker compose logs -f
+>    ```
+>
+>    Once you confirm there are no errors in the logs, you're good to go.
+>
+> 4. Restore data: Restore all data from the admin panel (R2 files from the old version need to be re-uploaded)
+> 
+> ### Rollback to Previous Version
+>
+> If something goes wrong after upgrading, follow these steps to roll back:
+>
+> 1. Stop the container:
+>
+>    ```bash
+>    docker compose down
+>    ```
+>
+> 2. Pull the previous image version:
+>
+>    ```bash
+>    # amd64
+>    docker pull marseventh/cloudflare-imgbed@sha256:896dc1b79883
+>    # arm
+>    docker pull marseventh/cloudflare-imgbed@sha256:b5442ccc198c
+>    ```
+>
+>    Also update the `image` field in `docker-compose.yml` to the old version tag, then restart:
+>
+>    ```bash
+>    docker compose up -d
+>    ```
+>
+> **Notes**:
+> - Make sure the backup is complete before upgrading, and back up the data folder if necessary
+> - If you have a custom `docker-compose.yml` (e.g., custom ports, environment variables), preserve those settings during the upgrade
+> - For issues, please check the documentation and existing issues first, or submit a new issue
+
 ## 2025.2.6 Version 2.0 Upgrade Notes
 
 > The v2.0 version has been released, with many changes and optimizations compared to v1.0. However, the beta version may have potential instability. If you prefer stability, you may delay updating.
